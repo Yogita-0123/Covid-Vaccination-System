@@ -1,0 +1,132 @@
+<div class="Main">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-8" style="margin-top: 20px;">
+      <h1>COVID-19 BOOSTER VACCINATIONS</h1>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="openModal(template, null)" style="height:50px ; width:70px; margin-top: 20px;">
+    <i class='fas fa-user-plus' style='font-size:35px;color:white'></i>
+    </button>
+  <br>
+
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add Candidate Name</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <label for="name"><b>Name:</b></label>
+         <input type="name" class="form-control" id="email" placeholder="Enter Candidate Name" name="email" [(ngModel)]="candidateName">
+
+         <label for="name"><b>phone:</b></label>
+         <input type="name" class="form-control" id="number" placeholder="Enter mobile no" name="number" [(ngModel)]="candidatePhone">
+
+         <label for="name"><b>Age:</b></label>
+         <input type="name" class="form-control" id="number" placeholder="Enter your Age" name="number" [(ngModel)]="candidateAge">
+
+
+      <label for="pwd"><b>Adhar Card Number:</b></label>
+         <input type="password" class="form-control" id="pwd" placeholder="Enter Adhar-Card Number" name="pswd" [(ngModel)]="candidateAdhar">
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="candidateName == '' " (click)="submit()" data-bs-dismiss="modal">Submit</button>
+      <button type="button" class="btn btn-danger" (click)="close()" >Close</button>
+    </div>
+
+
+  </ng-template>
+
+
+  <ng-template #edittemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Edit Candidate</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <label for="name"><b>Name:</b></label>
+         <input type="name" class="form-control" id="email" placeholder="Enter Candidate Name" name="email" [(ngModel)]="candidateName">
+
+        <label for="name"><b>phone:</b></label>
+         <input type="name" class="form-control" id="number" placeholder="Enter mobile no" name="number" [(ngModel)]="candidatePhone">
+
+         <label for="name"><b>Age:</b></label>
+         <input type="name" class="form-control" id="number" placeholder="Enter your Age" name="number" [(ngModel)]="candidateAge">
+
+
+      <label for="pwd"><b>Adhar Card Number:</b></label>
+         <input type="password" class="form-control" id="pwd" placeholder="Enter Adhar-Card Number" name="pswd" [(ngModel)]="candidateAdhar">
+
+    </div>
+
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="candidateName == '' " (click)="update()" data-bs-dismiss="modal">Update</button>
+      <button type="button" class="btn btn-danger" (click)="close()" >Close</button>
+    </div>
+
+
+  </ng-template>
+   <div class="row">
+      <div class="col-lg-3">
+        <h4>Candidate List</h4>
+        <br>
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item" style="background-color: rgb(247, 215, 220);" *ngFor="let candidate of candidateList; let i = index">{{candidate.name}}
+             <i class="fa fa-edit"  style="float: right; font-size:20px;"  (click)="openModal(edittemplate,i)"></i>
+           <i class='fas fa-redo' style='font-size:15px; float: right; margin-right: 15px;' (click)="V1Done(i)"></i>
+            <i class='fas fa-trash-alt' style='font-size:15px; float: right; margin-right: 15px;'(click)="Delete(i)"></i></li>
+        </ol>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>vaccine 1 </h4>
+        <br>
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item" style="background-color: rgb(245, 245, 182);" *ngFor="let candidate of v1candidate; let i = index">{{candidate.name}}
+          <i class='fas fa-redo' style='font-size:15px; float: right;' (click)="V2Done(i)"></i>
+            <i class="fa fa-undo" style="font-size:15px; float: right; margin-right: 20px;"(click)="cBack(i)"></i>
+          </li>
+
+        </ol>
+      </div>
+
+       <div class="col-lg-3">
+        <h4>vaccine 2  </h4>
+        <br>
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item" style="background-color: rgb(197, 235, 248);" *ngFor="let candidate of v2candidate; let i = index">{{candidate.name}}
+          <i class='fas fa-redo' style="font-size:15px; float:right;" (click)="BDone(i)"></i>
+          <i class="fa fa-undo" style="font-size: 15px; float:right; margin-right: 20px;" (click)="v1Back(i)"></i>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Booster Dose</h4>
+        <br>
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item" style="background-color: rgb(210, 210, 238);" *ngFor="let v2candidate of Bcandidate; let i = index">{{v2candidate.name}}
+          <i class="fa fa-undo" style="font-size:15px; float: right;" (click)="v2Back(i)"></i>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </div>
+  </div>
